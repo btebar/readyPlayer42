@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
@@ -10,16 +10,18 @@ class CameraView extends React.Component {
     photo: null
   }
 
-  async componentDidMount() {
+  componentDidMount = async () => {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({hasPermission: status === 'granted'});
   }
 
 
-  async snap(camera) {
+  snap = async (camera) => {
       if (camera) {
-        let newPhoto = await camera.takePictureAsync();
+        const options = { quality: 0.5, base64: true };
+        let newPhoto = await camera.takePictureAsync(options);
         this.setState({photo: newPhoto});
+        this.props.onSnapshot(newPhoto.base64);
       }
   }
 
