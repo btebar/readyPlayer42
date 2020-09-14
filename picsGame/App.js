@@ -10,7 +10,7 @@ class App extends React.Component {
   }
 
   getObjectsInImage = async (imageBase64) => {
-    // add loading: true so show spinner on screen while fetching results
+    // TODO: add loading: true so show spinner on screen while fetching results
     let results = await fetch(config.googleCloud.api + config.googleCloud.apiKey, {
         method: 'POST',
         body: JSON.stringify({
@@ -31,17 +31,21 @@ class App extends React.Component {
         console.log(results)
         if (results) {
             this.setState({
-                // add loading: false
+                // TODO: add loading: false
                 objects: results.responses[0].labelAnnotations
             })
         }
-    }).catch((error) => {console.log(error)}); // print some meaningful error on screen
+    // TODO: print some meaningful error on screen
+    }).catch((error) => {console.log(error)}); 
   }
 
-  onSnapshot = async imageBase64 => {
+  onSnapshot = imageBase64 => {
     await this.getObjectsInImage(imageBase64);
-    console.log(this.state.objects);
-
+    var objects = this.state.objects;
+    // Filter the objects returned by the api by score and keeps only 
+    // the description
+    let validatedResults = objects.filter((object) => object.score >= 0.7).map((object) => object.description);
+    console.log(validatedResults);
   }
 
   render() {

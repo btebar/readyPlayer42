@@ -1,0 +1,10 @@
+List of points to implement:
+
+- Integrate api / blanca
+- Qr scanning / charlie
+- Add button to camera screen which displays the list of objects remaining and
+  number of points they score
+- Add score label to camera screen
+- Show scoreboard?
+- Improve UI
+- Create rooms and codes for joining a room
