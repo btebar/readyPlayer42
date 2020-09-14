@@ -1,27 +1,4 @@
-/*
-import { BarCodeScanner } from 'expo-barcode-scanner';
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>works!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-*/
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button, Linking } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -51,19 +28,51 @@ export default function App() {
   }
 
   return (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-      }}>
-      <BarCodeScanner
-        barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-      />
-
-      {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
-    </View>
+    <BarCodeScanner
+      onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+      style={StyleSheet.absoluteFillObject, styles.container}
+    >
+      <View style={styles.layerTop} />
+      <View style={styles.layerCenter}>
+        <View style={styles.layerLeft} />
+        <View style={styles.focused} />
+        <View style={styles.layerRight} />
+      </View>
+      <View style={styles.layerBottom} />
+    </BarCodeScanner>
   );
 }
+
+const opacity = 'rgba(0, 0, 0, .8)';
+const styles = StyleSheet.create({
+  container: {
+  flex: 1,
+  flexDirection: 'column'
+  },
+  layerTop: {
+  flex: 2,
+  backgroundColor: opacity
+  },
+  layerBottom: {
+  flex: 2,
+  backgroundColor: opacity
+  },
+  layerCenter: {
+  flex: 2,
+  flexDirection: 'row'
+  },
+  layerLeft: {
+  flex: 2,
+  backgroundColor: opacity
+  },
+  layerRight: {
+  flex: 2,
+  backgroundColor: opacity
+  },
+  focused: {
+  flex: 10
+  }
+}
+);
+
+//  {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
