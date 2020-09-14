@@ -8,3 +8,5 @@ List of points to implement:
 - Show scoreboard?
 - Improve UI
 - Create rooms and codes for joining a room
+- App structure (login - join in a room(lobby) - start!)
+- Linking URL to online mode
