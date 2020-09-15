@@ -39,7 +39,7 @@ class App extends React.Component {
     }).catch((error) => {console.log(error)}); 
   }
 
-  onSnapshot = imageBase64 => {
+  onSnapshot = async imageBase64 => {
     await this.getObjectsInImage(imageBase64);
     var objects = this.state.objects;
     // Filter the objects returned by the api by score and keeps only 

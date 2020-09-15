@@ -13,10 +13,12 @@
     "expo-permissions": "~9.0.1",
     "expo-status-bar": "^1.0.2",
     "react": "~16.11.0",
+    "react-aria-modal": "^4.0.0",
     "react-dom": "~16.11.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
     "react-native-camera": "^3.39.0",
-    "react-native-web": "~0.11.7"
+    "react-native-web": "~0.11.7",
+    "react-overlays": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
