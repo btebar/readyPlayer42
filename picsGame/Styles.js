@@ -2,6 +2,18 @@ import { Dimensions } from 'react-native';
 const deviceWidth = Dimensions.get('screen').width;
 const deviceHeight = Dimensions.get('screen').height;
 const styles = {
+    placeholderSmallView: {
+        alignSelf: 'flex-end',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 70,
+        marginBottom: 20,
+        marginLeft: 15,
+        marginRight: 15,
+        flex:1,
+        padding: 20,
+        backgroundColor: 'transparent'
+    },
     genericButton: {
         alignSelf: 'flex-end',
         alignItems: 'center',
@@ -48,6 +60,12 @@ const styles = {
         justifyContent:'center',
         alignItems:'center',
         borderRadius: 30,
+        margin: 20,
+        marginTop: 50
+    },
+    modalPlaceholder: {
+        flex: 4,
+        backgroundColor: 'transparent',
         margin: 20,
         marginTop: 50
     },

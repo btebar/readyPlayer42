@@ -3,8 +3,8 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
 import styles from './Styles';
-import AriaModal from 'react-aria-modal';
 import ItemsModal from './ItemsModal';
+import FlashPoints from './FlashPoints';
 
 class CameraView extends React.Component {
   state = {
@@ -46,12 +46,25 @@ render() {
     return <Text>No access to camera</Text>;
   }
   var camera = null;
-  const modal = isModalVisible ? <ItemsModal closeModal={() => {this.setState({isModalVisible : false})}}></ItemsModal> : false;
+  const modal = isModalVisible ? <ItemsModal seenObjects={this.props.objects} closeModal={() => {this.setState({isModalVisible : false})}}></ItemsModal> : 
+  <View style={{...styles.modalPlaceholder}}></View>;
+  // const flashEffect = this.props.newPoints > 0 ? <FlashPoints > {this.props.newPoints} </FlashPoints> : false;
   return(
     <View style={{ flex: 1 }}>
       <Camera style={{ flex: 1 }} type={type} ref={ref => {
         camera = ref}}>
+          <View
+          style={{...styles.buttonsRow}}>
+            <View style={{...styles.placeholderSmallView}}>
+            </View>
+            <View style={{...styles.primaryButton, ...styles.genericButton, ...{flex: 2}}}>
+              <Text style={{...styles.primaryText }}> {this.props.points} points </Text>
+            </View>
+            <View style={{...styles.placeholderSmallView}}>
+            </View>
+          </View>
           {modal}
+          {/* {flashEffect} */}
         <View
           style={{...styles.buttonsRow}}>
           <TouchableOpacity

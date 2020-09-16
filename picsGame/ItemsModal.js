@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './Styles';
+import Objects from './Objects.json';
 
 class ItemsModal extends React.Component {
     state = {
@@ -19,9 +20,22 @@ class ItemsModal extends React.Component {
     }
 
     displayItems = () => {
-        const listItems = this.state.items.map((item, i) =>
-            <Text style={{...styles.itemsModalText}} key={i}> {item.label} - {item.points} points</Text>
-        );
+        const seenObjects = this.props.seenObjects;
+        const listItems = Objects.goalObjects.map((item, i) => {
+            if (seenObjects && seenObjects.some((seenObj) => item.label == seenObj)) {
+               return ( 
+                <Text style={{...styles.itemsModalText, ...{textDecorationLine: 'line-through'}}} key={i}> 
+                    {item.label} - {item.points} points
+                </Text>
+                );
+            } else {
+                return (
+                <Text style={{...styles.itemsModalText}} key={i}> 
+                    {item.label} - {item.points} points
+                </Text>
+                );
+            }
+        });
         return (
             listItems
         );
