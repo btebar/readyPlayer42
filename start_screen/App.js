@@ -1,31 +1,21 @@
-import React, { memo } from 'react';
-import Background from './components/Background';
-import Logo from './components/Logo';
-import Header from './components/Header';
-import Button from './components/Button';
-import Paragraph from './components/Paragraph';
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './HomeScreen';
+import Scanner from './Scanner';
 
-const HomeScreen = ({ navigation }) => (
-  <Background>
-    <Logo />
-    <Header>42 Snaps</Header>
+const Stack = createStackNavigator();
 
-    <Paragraph>
-      Are you ready?
-    </Paragraph>
-        <Button mode="contained" onPress={() => navigation.navigate('')}>
-      Start!
-    </Button>
-    <Button mode="outlined" onPress={() => navigation.navigate('')}>
-      Create new room
-    </Button>
-    <Button
-      mode="outlined"
-      onPress={() => navigation.navigate('')}
-    >
-      Join a room
-    </Button>
-  </Background>
-);
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator headerShown={false}>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Scanner" component={Scanner}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 
-export default memo(HomeScreen);
+export default App;

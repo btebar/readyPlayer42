@@ -55,19 +55,17 @@ const styles = {
         flexDirection: 'row',
     },
     modal: {
-        flex: 4,
+        flex: 1,
         backgroundColor: 'white',
         justifyContent:'center',
         alignItems:'center',
-        borderRadius: 30,
-        margin: 20,
-        marginTop: 50
+        borderRadius:30
     },
     modalPlaceholder: {
         flex: 4,
         backgroundColor: 'transparent',
         margin: 20,
-        marginTop: 50
+        marginTop: 50,
     },
     itemsColumn: {
         flex: 6,

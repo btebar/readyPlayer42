@@ -1,22 +1,23 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import styles from './Styles';
-import Objects from './Objects.json';
+import Objects from '../Objects.json';
 import {Transition} from 'react-transition-group';
 
+const transitionDuration = 500;
+const transitionStyle = {
+    entering: {opacity: 0.5},
+    entered: {opacity: 1},
+    exiting: {opacity: 0.5},
+    exited: {opacity: 0}
+};
+const defaultStyle = {
+    transition: `opacity 500ms ease-in-out`,
+    opacity: 0,
+};
+
 class ItemsModal extends React.Component {
-    state = {
-        transitionDuration : 500,
-        transitionStyle : {
-            entering: {opacity: 0.5},
-            entered: {opacity: 1},
-            exiting: {opacity: 0.5},
-            exited: {opacity: 0}
-        },
-        defaultStyle : {
-            transition: `opacity 500ms ease-in-out`,
-            opacity: 0,
-        }
+    state = {   
     }
 
     displayItems = () => {
@@ -42,14 +43,14 @@ class ItemsModal extends React.Component {
     }
     
     render() {
-        const {transitionDuration, transitionStyle, defaultStyle} = this.state;
         return (
                 <Transition in={this.props.in} timeout={transitionDuration}>
                     {state => (
                         <View style={{...defaultStyle,
                         ...transitionStyle[state],
-                        ...styles.modal
+                        ...styles.modalPlaceholder 
                     }}>
+                        <View style={{...styles.modal}}>
                         <View style={{...styles.itemsColumn}}>
                             {this.displayItems()}   
                         </View>
@@ -60,6 +61,7 @@ class ItemsModal extends React.Component {
                                 <Text style={{...styles.secondaryText }}> CLOSE </Text>
                             </TouchableOpacity>
                         </View>  
+                        </View>
                         </View>
                 )}
             </Transition>    
