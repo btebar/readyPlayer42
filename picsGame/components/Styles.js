@@ -49,18 +49,25 @@ const styles = {
         fontSize: 15,
         color: 'white'
     },
+    closeButtonText: {
+        fontFamily: 'Hoefler Text',
+        fontSize: 10,
+        color: 'white'
+    },
     buttonsRow: {
         flex: 1,
         backgroundColor: 'transparent',
         flexDirection: 'row',
     },
     modal: {
-        flex: 1,
+        flex: 4,
         backgroundColor: 'white',
         justifyContent:'center',
         alignItems:'center',
-        borderRadius:30
-    },
+        borderRadius: 30,
+         margin: 20,
+         marginTop: 50
+     },
     modalPlaceholder: {
         flex: 4,
         backgroundColor: 'transparent',
@@ -68,7 +75,7 @@ const styles = {
         marginTop: 50,
     },
     itemsColumn: {
-        flex: 6,
+        flex: 5,
         justifyContent:'center',
         flexDirection: 'column',
         alignItems:'center',

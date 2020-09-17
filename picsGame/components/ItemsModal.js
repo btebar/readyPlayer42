@@ -44,27 +44,19 @@ class ItemsModal extends React.Component {
     
     render() {
         return (
-                <Transition in={this.props.in} timeout={transitionDuration}>
-                    {state => (
-                        <View style={{...defaultStyle,
-                        ...transitionStyle[state],
-                        ...styles.modalPlaceholder 
-                    }}>
-                        <View style={{...styles.modal}}>
-                        <View style={{...styles.itemsColumn}}>
-                            {this.displayItems()}   
-                        </View>
-                        <View style={{...styles.buttonsRow}}>
-                            <TouchableOpacity
-                                style={{...styles.closeButton, ...styles.genericButton}}
-                                onPress={() => this.props.closeModal()}>
-                                <Text style={{...styles.secondaryText }}> CLOSE </Text>
-                            </TouchableOpacity>
-                        </View>  
-                        </View>
-                        </View>
-                )}
-            </Transition>    
+                
+        <View style={{...styles.modal}}>
+            <View style={{...styles.itemsColumn}}>
+                {this.displayItems()}   
+            </View>
+            <View style={{...styles.buttonsRow}}>
+                <TouchableOpacity
+                    style={{...styles.closeButton, ...styles.genericButton}}
+                    onPress={() => this.props.closeModal()}>
+                    <Text style={{...styles.secondaryText }}> CLOSE </Text>
+                </TouchableOpacity>
+            </View>      
+        </View>
 
                
         );

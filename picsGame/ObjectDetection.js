@@ -45,19 +45,20 @@ class ObjectDetection extends React.Component {
   }
 
   onSnapshot = async imageBase64 => {
-  //var newObjects = await this.getObjectsInImage(imageBase64);
-    var newObjects = [{
-      description: 'Cup',
-      score: 0.8
-    },
-    {
-      description: 'Bottle',
-      score: 0.8
-    }, {
-      description: 'Window',
-      score: 0.9
-    }
-  ]
+  var newObjects = await this.getObjectsInImage(imageBase64);
+  console.log(newObjects);
+  //   var newObjects = [{
+  //     description: 'Cup',
+  //     score: 0.8
+  //   },
+  //   {
+  //     description: 'Bottle',
+  //     score: 0.8
+  //   }, {
+  //     description: 'Window',
+  //     score: 0.9
+  //   }
+  // ]
     // Filter the objects returned by the api by score and keeps only 
     // the description
     let validatedResults = newObjects.filter((object) => object.score >= 0.7).map((object) => object.description);

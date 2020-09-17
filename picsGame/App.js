@@ -12,7 +12,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator headerShown={false}>
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Game" component={ObjectDetection}/>
+        <Stack.Screen name="42 Snaps" component={ObjectDetection}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

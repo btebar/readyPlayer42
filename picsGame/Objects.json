@@ -9,23 +9,49 @@
             "points": 2  
         },
         {
-            "label": "Ham",
+            "label": "Record player",
             "points": 5  
         },
         {
-            "label": "Pencil",
+            "label": "Book",
             "points": 6  
+        },
+        {
+            "label": "Tv",
+            "points": 7 
+        },
+        {
+            "label": "Game boy advance",
+            "points": 6 
         },
         {
             "label": "Bottle",
-            "points": 15  
+            "points": 6 
         },
         {
-            "label": "Jar",
+            "label": "Cd player",
             "points": 6  
         },
         {
-            "label": "Table",
+            "label": "Rubik's cube",
             "points": 6  
-        }]
+        }],
+    "bonusObjects": [
+        {
+            "label": "Rubik's cube",
+            "points": 11 
+        },
+        {
+            "label": "Cd player",
+            "points": 11  
+        },
+        {
+            "label": "Record player",
+            "points": 11  
+        },
+        {
+            "label": "Book",
+            "points": 11 
+        }
+    ]
 }
