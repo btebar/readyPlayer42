@@ -46,7 +46,7 @@ render() {
     return <Text>No access to camera</Text>;
   }
   var camera = null;
-  const modal = isModalVisible ? <ItemsModal seenObjects={this.props.objects} closeModal={() => {this.setState({isModalVisible : false})}}></ItemsModal> : 
+  const modal = isModalVisible ? <ItemsModal in={true} seenObjects={this.props.objects} closeModal={() => {this.setState({isModalVisible : false})}}></ItemsModal> : 
   <View style={{...styles.modalPlaceholder}}></View>;
   // const flashEffect = this.props.newPoints > 0 ? <FlashPoints > {this.props.newPoints} </FlashPoints> : false;
   return(
