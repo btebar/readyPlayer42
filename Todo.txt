@@ -5,8 +5,10 @@ List of points to implement:
 - Add button to camera screen which displays the list of objects remaining and
   number of points they score
 - Add score label to camera screen
-- Show scoreboard?
+- Show scoreboard and link button to send_scores in last screen
 - Improve UI
 - Create rooms and codes for joining a room
 - App structure (login - join in a room(lobby) - start!)
 - Linking URL to online mode
+- Create rooms and codes for joining a room - anto
+- Add timer

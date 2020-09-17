@@ -2,12 +2,23 @@ import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
 import * as Permissions from 'expo-permissions';
+import styles from './Styles';
+import ItemsModal from './ItemsModal';
+import FlashPoints from './FlashPoints';
 
 class CameraView extends React.Component {
   state = {
     hasPermission: null,
     type: Camera.Constants.Type.back,
-    photo: null
+    photo: null,
+    isModalVisible: false,
+  }
+
+  renderBackdrop = () => {
+    return (
+      <div style={{...styles.backdrop}}>
+      </div>
+    )
   }
 
   componentDidMount = async () => {
@@ -26,7 +37,8 @@ class CameraView extends React.Component {
   }
 
 render() {   
-  const {hasPermission, type, photo} = this.state;
+  const {hasPermission, type, photo, isModalVisible} = this.state;
+  console.log(isModalVisible);
   if (hasPermission === null) {
     return <View />;
   }
@@ -34,41 +46,52 @@ render() {
     return <Text>No access to camera</Text>;
   }
   var camera = null;
+  const modal = isModalVisible ? <ItemsModal in={true} seenObjects={this.props.objects} closeModal={() => {this.setState({isModalVisible : false})}}></ItemsModal> : 
+  <View style={{...styles.modalPlaceholder}}></View>;
+  // const flashEffect = this.props.newPoints > 0 ? <FlashPoints > {this.props.newPoints} </FlashPoints> : false;
   return(
     <View style={{ flex: 1 }}>
       <Camera style={{ flex: 1 }} type={type} ref={ref => {
         camera = ref}}>
+          <View
+          style={{...styles.buttonsRow}}>
+            <View style={{...styles.placeholderSmallView}}>
+            </View>
+            <View style={{...styles.primaryButton, ...styles.genericButton, ...{flex: 2}}}>
+              <Text style={{...styles.primaryText }}> {this.props.points} points </Text>
+            </View>
+            <View style={{...styles.placeholderSmallView}}>
+            </View>
+          </View>
+          {modal}
+          {/* {flashEffect} */}
         <View
-          style={{
-            flex: 1,
-            backgroundColor: 'transparent',
-            flexDirection: 'row',
-          }}>
+          style={{...styles.buttonsRow}}>
           <TouchableOpacity
-            style={{
-              flex: 0.3,
-              alignSelf: 'flex-end',
-              alignItems: 'center',
-            }}
+            style={{...styles.secondaryButton, ...styles.genericButton}}
             onPress={() => {
                 this.setState({type : type === Camera.Constants.Type.back
                   ? Camera.Constants.Type.front
                   : Camera.Constants.Type.back
                 });
             }}>
-            <Text style={{ fontSize: 18, marginLeft:20, marginBottom: 40, color: 'white' }}> Flip </Text>
+            <Text style={{...styles.secondaryText }}> FLIP </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{
-              flex: 0.3,
-              alignSelf: 'flex-end',
-              alignItems: 'center',
-            }}
+            style={{...styles.primaryButton, ...styles.genericButton}}
             onPress={() => {this.snap(camera);}}>
-            <Text style={{ fontSize: 18, marginRight:20, marginBottom: 40, color: 'white' }}> Snap </Text>
+            <Text style={{ ...styles.primaryText }}> SNAP </Text>
           </TouchableOpacity>
-        </View>
+          <TouchableOpacity
+            style={{...styles.secondaryButton, ...styles.genericButton}}
+            onPress={() => this.setState({isModalVisible: true})}>
+            <Text style={{...styles.secondaryText }}> ITEMS </Text>
+          </TouchableOpacity>
+         
+        </View> 
       </Camera>
+     
+      
     </View>
   );
     }

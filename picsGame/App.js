@@ -2,11 +2,14 @@ import React from 'react';
 import { View} from 'react-native';
 import CameraView from './CameraView';
 import config from './config';
+import Objects from './Objects';
 
 
 class App extends React.Component {
   state = {
-    objects: null
+    objects: null,
+    points: 0,
+    newPoints: 0
   }
 
   getObjectsInImage = async (imageBase64) => {
@@ -27,29 +30,50 @@ class App extends React.Component {
         })
     });
 
-    await results.json().then(results => {
+    let answer = await results.json().then(results => {
         console.log(results)
         if (results) {
-            this.setState({
-                // TODO: add loading: false
-                objects: results.responses[0].labelAnnotations
-            })
+            // this.setState({
+            //     // TODO: add loading: false
+            //     objects: results.responses[0].labelAnnotations
+            // })
+            return results.responses[0].labelAnnotations;
         }
     // TODO: print some meaningful error on screen
     }).catch((error) => {console.log(error)}); 
+    return answer;
   }
 
-  onSnapshot = imageBase64 => {
-    await this.getObjectsInImage(imageBase64);
-    var objects = this.state.objects;
+  onSnapshot = async imageBase64 => {
+  //var newObjects = await this.getObjectsInImage(imageBase64);
+    var newObjects = [{
+      description: 'Cup',
+      score: 0.8
+    },
+    {
+      description: 'Bottle',
+      score: 0.8
+    }, {
+      description: 'Window',
+      score: 0.9
+    }
+  ]
     // Filter the objects returned by the api by score and keeps only 
     // the description
-    let validatedResults = objects.filter((object) => object.score >= 0.7).map((object) => object.description);
+    let validatedResults = newObjects.filter((object) => object.score >= 0.7).map((object) => object.description);
+    const {objects, points} = this.state;
+    if (objects) {
+      validatedResults = [...objects, ...validatedResults];
+    }
+    let newPoints = Objects.goalObjects.filter((obj) => validatedResults.some((res) => res == obj.label)).reduce((prev, next) => prev + next.points, 0);
+    let difference = newPoints - points;
+    this.setState({objects: validatedResults, points: newPoints, newPoints: difference});
     console.log(validatedResults);
   }
 
   render() {
-    return <CameraView onSnapshot={this.onSnapshot}/>;
+    const {objects, points, newPoints} = this.state;
+    return <CameraView onSnapshot={this.onSnapshot} objects={objects} points={points} newPoints={newPoints}/>;
   }
   
 }
