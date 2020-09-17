@@ -1,0 +1,31 @@
+{
+    "goalObjects": [
+        {
+            "label": "Cup",
+            "points": 2  
+        },
+        {
+            "label": "Shower",
+            "points": 2  
+        },
+        {
+            "label": "Ham",
+            "points": 5  
+        },
+        {
+            "label": "Pencil",
+            "points": 6  
+        },
+        {
+            "label": "Bottle",
+            "points": 15  
+        },
+        {
+            "label": "Jar",
+            "points": 6  
+        },
+        {
+            "label": "Table",
+            "points": 6  
+        }]
+}
